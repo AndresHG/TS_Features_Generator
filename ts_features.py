@@ -106,7 +106,7 @@ def main(console_args=None):
 
     if not args.csv_with_headers:
         df = _preprocess(df)
-    pprint(df)
+    # pprint(df)
 
     df_features = extract_features(df, column_kind=column_kind,
                                    column_sort=column_sort, column_value=column_value,
@@ -126,7 +126,7 @@ def main(console_args=None):
     df_features.columns = new_columns
 
     df_features['class'] = algs
-    pprint(df_features)
+    # pprint(df_features)
 
     # write to disk
     default_out_file_name = os.path.splitext(input_file_name)[0] + '.features.csv'
