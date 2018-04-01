@@ -114,8 +114,10 @@ def main(console_args=None):
 
     # re-cast index from float to int
     df_features.index = df_features.index.astype('int')
-    df_features = df_features.dropna(axis="columns", how='all')
-    df_features = df_features.loc[:, (df_features != df_features.iloc[0]).any()]
+    df_features = df_features.fillna(0.000000) # Replace all NA with 0
+    # df_features = df_features.dropna(axis="columns", how='all') # Delete N/A columns
+    # df_features = df_features.loc[:, (df_features != df_features.iloc[0]).any()] # Delete clumns with same value in all
+                                                                                # of its rows
 
     new_columns = []
     counter = 0
@@ -132,6 +134,7 @@ def main(console_args=None):
     default_out_file_name = os.path.splitext(input_file_name)[0] + '.features.csv'
     output_file_name = args.output_file_name or default_out_file_name
     df_features.to_csv(output_file_name)
+#     If needed new serparator use: sep=";" es decir, sep="{new separator}"
 
 
 if __name__ == '__main__':
